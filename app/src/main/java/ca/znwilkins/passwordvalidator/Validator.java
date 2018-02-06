@@ -10,8 +10,16 @@ public class Validator {
 	static List<Rule> ruleList = new ArrayList<>();
 
 	static {
+		// Can't be password
 		ruleList.add(new Rule("password", Pattern.CASE_INSENSITIVE));
+		// At least 8 characters
 		ruleList.add(new Rule("^.{0,7}$"));
+		// At least one special character
+		ruleList.add(new Rule("^[a-zA-Z0-9]+$"));
+		// At least one digit
+		ruleList.add(new Rule("^[^\\d]+$"));
+		// At least one uppercase
+		ruleList.add(new Rule("^[^A-Z]+$"));
 	}
 
 	public static int validate(String password) {

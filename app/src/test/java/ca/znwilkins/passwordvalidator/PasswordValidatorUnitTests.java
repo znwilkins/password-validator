@@ -9,8 +9,11 @@ import static org.junit.Assert.*;
 
 public class PasswordValidatorUnitTests {
 
-	private final int PASSWORD_RULE = 0;
-	private final int LENGTH_RULE = 1;
+	private static final int PASSWORD_RULE = 0;
+	private static final int LENGTH_RULE = 1;
+	private static final int SPECIAL_CHAR_RULE = 2;
+	private static final int DIGIT_RULE = 3;
+	private static final int MIXED_CASE_RULE = 4;
 
 	private Validator validator;
 
@@ -48,6 +51,42 @@ public class PasswordValidatorUnitTests {
 	@Test
 	public void passwordIsLongEnough() {
 		Matcher matcher = Validator.ruleList.get(LENGTH_RULE).getMatcher("ninechars");
+		assertFalse(matcher.matches());
+	}
+
+	@Test
+	public void passwordHasNoSpecialChars() {
+		Matcher matcher = Validator.ruleList.get(SPECIAL_CHAR_RULE).getMatcher("abc");
+		assertTrue(matcher.matches());
+	}
+
+	@Test
+	public void passwordHasSpecialChars() {
+		Matcher matcher = Validator.ruleList.get(SPECIAL_CHAR_RULE).getMatcher("!@#");
+		assertFalse(matcher.matches());
+	}
+
+	@Test
+	public void passwordHasNoDigit() {
+		Matcher matcher = Validator.ruleList.get(DIGIT_RULE).getMatcher("abc");
+		assertTrue(matcher.matches());
+	}
+
+	@Test
+	public void passwordHasDigit() {
+		Matcher matcher = Validator.ruleList.get(DIGIT_RULE).getMatcher("abc123");
+		assertFalse(matcher.matches());
+	}
+
+	@Test
+	public void passwordHasNoUpperCase() {
+		Matcher matcher = Validator.ruleList.get(MIXED_CASE_RULE).getMatcher("abc");
+		assertTrue(matcher.matches());
+	}
+
+	@Test
+	public void passwordHasUpperCase() {
+		Matcher matcher = Validator.ruleList.get(MIXED_CASE_RULE).getMatcher("abcABC");
 		assertFalse(matcher.matches());
 	}
 
