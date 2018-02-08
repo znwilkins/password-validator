@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Password Validator</string>
+    <string name="validate_button">Validate</string>
+    <string name="enter_password">Enter a password</string>
+    <string name="strong_password">Strong password!</string>
+    <string name="weak_password">Weak password!</string>
+    <string name="empty_password">Password cannot be empty!</string>
 </resources>
